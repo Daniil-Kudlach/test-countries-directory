@@ -48,9 +48,9 @@
   })
   // data
   onBeforeMount(async () => {
-    if (route.params.cca3) {
+    if (<string>route.params.cca3) {
       state.isLoading = true
-      await store.searchDetail(route.params.cca3)
+      await store.searchDetail(<string>route.params.cca3)
       state.isLoading = false
     }
   })

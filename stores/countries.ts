@@ -7,8 +7,7 @@ export const useCountryStore = defineStore('country', () => {
   
   async function search(data: string) {
     try {
-      console.log(searchBy.value)
-      const endpoint = useCountriesEndpoints(searchBy.value, data)
+      const endpoint = useCountriesEndpoints(searchBy.value, data, 'globalSearch')
       const result = await $fetch(endpoint)
       if (<[ISearchResultList]>(result)) {
         countries.value = <[ISearchResultList]>(result)
@@ -22,10 +21,10 @@ export const useCountryStore = defineStore('country', () => {
 
   async function searchDetail(cca3: string) {
     try {
-      const endpoint = useCountriesEndpoints('code', cca3)
+      const endpoint = useCountriesEndpoints('code', cca3, 'detailSearch')
       const result = await $fetch(endpoint)
-      if (result?.[0]) {
-        countryDetails.value = <ISearchResultDetail>(result?.[0])
+      if (result) {
+        countryDetails.value = <ISearchResultDetail>(result)
       }
       return result
     } catch(e) {
